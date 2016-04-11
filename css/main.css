@@ -1,0 +1,928 @@
+body {
+  margin: 0px;
+  font-family: helvetica;
+}
+
+.next {
+/*  display: none;*/
+}
+
+.wrapper {
+  width: 1024px;
+  height: 768px;
+  background: #3C4553;
+  position: relative;
+}
+
+.screen {
+  background: #333b4a;
+  background: url(../assets/prisons-bg@2x.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width:1024px;
+  height: 768px;
+  position: absolute;
+  top:0;
+  right: 0;
+}
+
+.square{
+  position: absolute;
+  z-index: 1;
+
+}
+
+.padded-box {
+  padding:55px 50px 50px;
+}
+
+/** Home Screen **/
+
+
+.home-screen .card-wrapper ul {
+  margin: 0px;
+  padding: 0px;
+}
+
+.home-screen .card-wrapper ul li {
+  list-style: none;
+  width: 23%;
+  display: inline-block;
+  margin-right: 2%;
+}
+
+
+.home-screen h1 {
+  text-align: center;
+  margin-top: 0px;
+  text-shadow: 0 4px 0px #272c35;
+  margin-bottom: 10px;
+  font-size: 54px;
+}
+
+.home-screen p.main-screen-intro {
+  text-align: center;
+  font-size: 21px;
+  margin-bottom: 30px;
+  font-weight: 100;
+  line-height: 32px;
+}
+
+.card-wrapper li {
+  height: 203px;
+  position: relative;
+  list-style-type: none;
+}
+
+.card-wrapper .card {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  perspective:800px;
+}
+
+.card-wrapper .card div {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transition-duration: 400ms;
+  transition-duration: 400ms;
+  z-index:10;
+}
+
+.card-wrapper .card .front {
+}
+
+.card-wrapper .card .back {
+  background: #8d797a;
+  z-index:0;
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+  border: 3px solid white;
+}
+
+.card-wrapper .card .back h4{
+  font-size: 20px;
+  color:#FFFFFF;
+  margin-bottom:5px;
+  font-weight: bold;
+}
+
+.card-wrapper .card .back section {
+  padding: 20px;
+  text-align: center;
+  padding-top:30px;
+}
+
+.card-wrapper .card .back p {
+  font-size: 18px;
+  font-weight: 200;
+  color:white;
+  margin: 0px;
+  line-height: 30px;
+}
+
+.card-wrapper .card.flip .front {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+    z-index:0;
+}
+.card-wrapper .card.flip .back {
+    -webkit-transform: rotateY(360deg);
+    transform: rotateY(360deg);
+    z-index:10;
+}
+
+.card-wrapper .more-info {
+    font-size: 1.5em;
+    width: 1.5em !important;
+    text-align: center;
+    line-height: 1.5em;
+    background: #FFF;
+    color: #fff;
+    border-radius: 50px;
+    position: absolute !important;
+    top: -18px;
+    right: -12px;
+    height: 1.5em !important;
+    box-shadow: 0 4px 2px -2px rgba(0,0,0,0.4);
+}
+
+.card-wrapper .more-info img {
+	width:8px;
+}
+
+.card-wrapper .close-icon {
+    font-size: 1.5em;
+    width: 1.5em !important;
+    text-align: center;
+    line-height: 1.45em;
+    background: #FFF;
+    color: #fff;
+    border-radius: 50px;
+    position: absolute !important;
+    top: -18px;
+    right: -12px;
+    height: 1.5em !important;
+	box-shadow: 0 4px 2px -2px rgba(0,0,0,0.4);
+}
+
+.card-wrapper .close-icon img {
+	width: 14px;
+}
+
+.card-wrapper .card .close-icon {
+  display: none;
+}
+
+.card-wrapper .card.flip .more-info {
+  display: none;
+}
+
+.card-wrapper .card.flip .close-icon {
+  display: block;
+}
+
+.card-wrapper {
+    position: absolute;
+    width: 90%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.bottom-row {
+    position:absolute;
+    display:none;
+    width: 60%;
+    left: 0;
+    right: 0;
+    bottom: 50px;
+    margin: auto;
+    height:200px;
+}
+.bottom-row li {
+    list-style:none;
+    float:left;
+    width:115px;
+    height:115px;
+    margin-left:3%;
+}
+
+.bottom-row .back {
+  display: none;
+}
+
+.bottom-row .more-info {
+  display: none;
+}
+
+.bottom-row .more-info2 {
+  display: none;
+}
+#square1{
+  left:50px;
+}
+#square2{
+  left:180px;
+}
+
+#square3{
+  right:175px;
+}
+#square4{
+  right:50px;
+}
+
+#Incapacitation{
+  left:50px;
+}
+#Deterrence{
+  left:180px;
+}
+
+#Rehabilitation{
+  right:175px;
+}
+#Retribution{
+  right:50px;
+}
+
+.placed{
+ border: 1px solid white;
+}
+
+.bordered-boxes {
+    position: absolute;
+    width: 75%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    display: none;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.bordered-boxes ul {
+    display: table;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.bordered-boxes ul li {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 4%;
+}
+
+/** Did you know screen ***/
+
+.did-you-know {
+  position: absolute;
+  top:20%;
+}
+
+.did-you-know-screen {
+  background: url(../assets/prisons-funfact-bg@2x.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.did-you-know-screen .selected-square {
+  width: 15%;
+}
+
+.did-you-know-screen .details {
+  width: 65%;
+  padding-left: 6%;
+}
+
+.did-you-know-screen .details h1, p{
+  color:white;
+}
+
+.did-you-know-screen .details p {
+  font-size: 20px;
+  margin-bottom: 30px;
+  line-height: 40px;
+  font-weight: 100;
+}
+
+span.underline {
+  border-bottom: 3px solid red;
+  font-weight: 600;
+}
+
+
+/** Pie Chart Screen **/
+
+.pie-stat-screen .chart-detail {
+  margin-top: 50px;
+}
+
+.pie-stat-screen .percentage {
+	font-size: 36px;
+    font-weight: 400;
+}
+
+.pie-stat-screen .chart-detail .pie-chart {
+  width: 50%;
+  float: left;
+}
+.pie-stat-screen .question {
+  margin-top:110px;
+}
+
+.pie-stat-screen .chart-detail .detail {
+  width: 45%;
+  float: right;
+  padding-left: 5%;
+  padding-top: 5%;
+}
+
+.pie-stat-screen .chart-detail .detail h1{
+  text-align: left;
+  font-size: 32px;
+  font-weight: 100;
+  line-height: 45px;
+}
+
+.pie-stat-screen .chart-legend {
+    position: absolute;
+    top: 215px;
+    left: 400px;
+}
+
+.pie-stat-screen .chart-legend ul {
+  margin: 0px;
+  padding: 0px;
+}
+
+.pie-stat-screen .chart-legend ul li {
+  list-style: none;
+    color:white;
+    font-size: 14px;
+    margin:8px 0;
+}
+
+.pie-stat-screen .chart-legend li span{
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 10px;
+}
+
+
+.pie-stat-screen h1 {
+  font-weight: 200;
+  text-align: center;
+  font-size: 35px;
+}
+
+.pie-stat-screen button {
+  width: 140px;
+    margin: 0 10px;
+    font-size: 20px;
+    padding: 20px;
+    font-weight: bold;
+    border-width: 3px;
+}
+
+.pie-stat-screen button.active {
+  color:#353535;
+  background: white;
+  box-shadow: 0 7px 0px #272c35;
+}
+
+.pie-stat-screen .options {
+  text-align: center;
+}
+
+/** Other Reason Screen **/
+
+.other-reason-screen {
+  background: url(../assets/prisons-funfact-bg@2x.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.other-reason-screen .other-reason {
+  position: absolute;
+    top: 30%;
+    margin: 0 auto;
+    right: 0;
+    left: 0;
+    width: 75%;
+}
+
+.other-reason-screen .other-reason h1 {
+  font-weight: 200;
+  text-align: center;
+  color:white;
+  line-height:55px;
+  font-size: 36px;
+}
+
+.other-reason-screen .btn-area {
+  position: absolute;
+    right: 0;
+    left: 0;
+    text-align: center;
+    bottom: 90px;
+}
+
+.other-reason-screen .btn-area a.btn {
+	display: inline-block;
+    width: 350px;
+    border-width: 3px;
+    font-size: 24px;
+    padding: 30px 40px;
+    font-weight: 600;
+}
+
+.why-else-screen h1 {
+  text-align: center;
+  margin-top: 0px;
+  text-shadow: 0 4px 0px #272c35;
+}
+
+/** Why else screen **/
+
+.why-else-screen p {
+  text-align: center;
+  font-size: 21px;
+  margin-bottom: 10px;
+  font-weight: 100;
+  line-height: 32px;
+}
+
+.why-else-screen .reason-options {
+  margin-top:35px;
+}
+
+.why-else-screen .reason-options ul {
+	padding: 0;
+	margin: 0 auto;
+	text-align: center;
+	width: 75%;
+}
+
+.why-else-screen .reason-options ul li{
+	display: inline-block;
+    text-align: center;
+    list-style: none;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    width: 25%;
+}
+
+.why-else-screen .reason-options ul li img {
+	-webkit-transition: opacity 0.5s ease-in;
+}
+
+.why-else-screen .reason-options ul li.active img {
+	opacity: 1;
+	transition: opacity 0.25s ease-in;
+}
+
+.why-else-screen .reason-options ul li.non-active img {
+	opacity: .5;
+	transition: opacity 0.25s ease-in;
+}
+
+.why-else-screen .reason-options ul li.selected img {
+	opacity: 1;
+	transition: opacity 0.25s ease-in;
+
+}
+
+/*** Final Screen **/
+
+.final-screen h1 {
+  text-align: center;
+  margin-top: 0px;
+  text-shadow: 0 4px 0px #272c35;
+}
+
+.final-screen p {
+  text-align: center;
+  font-size: 21px;
+  margin-bottom: 30px;
+  font-weight: 100;
+  line-height: 32px;
+}
+
+.final-chart {
+  padding-top: 50px;
+}
+
+.final-chart .pie-graph {
+  width: 50%;
+    float: left;
+}
+
+.final-screen .final-chart-legend {
+  width: 40%;
+    float: right;
+    padding-left: 10%;
+    display: flex;
+    align-items: center;
+    height: 404px;
+}
+
+.final-screen .final-chart-legend ul {
+  margin: 0px;
+  padding: 0px;
+}
+
+.final-screen .final-chart-legend ul li {
+  list-style: none;
+    color:white;
+    font-weight: 100;
+    font-size: 24px;
+    margin:5px 0;
+}
+
+.final-screen .final-chart-legend li span{
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+}
+
+/** Helper Items **/
+
+.home-icon {
+  position: absolute;
+  top:10px;
+  left: 10px;
+  z-index: 10;
+}
+
+.home-icon.faded {
+  opacity: .5;
+}
+
+a {
+  text-decoration:none;
+}
+
+a:hover {
+  text-decoration:none;
+}
+
+h1{
+  font-size: 36px;
+  color: white;
+}
+
+.navigation {
+  position: absolute;
+  z-index: 1;
+  bottom: 30px;
+  right: 30px;
+}
+
+span.underline {
+  border-bottom: 3px solid red;
+  font-weight: 600;
+}
+
+span.underline.blue {
+  border-bottom: 3px solid #2980eb;
+}
+
+
+.btn-outline {
+  border: 2px solid #fff;
+  background: transparent;
+  color:#fff;
+  border-radius: 50px;
+  padding:11px 15px
+}
+
+.next-button {
+	font-size: 18px;
+	padding: 15px 20px;
+    font-weight: bold;
+}
+
+.btn-outline:hover, .btn-outline:active {
+  border: 2px solid #fff;
+  background: #fff;
+  color:#353535;
+}
+
+.disabled {
+	opacity: .7;
+}
+
+.disabled:hover, .disabled:active {
+	border: 2px solid #fff !important;
+	background: transparent !important;
+	color:#fff !important;
+}
+
+.left {
+  float:left;
+}
+
+.rigth {
+  float: right;
+}
+
+.faded {
+  opacity: .45;
+}
+
+.tooltip {
+  background: #FFF;
+    color: black;
+    position: absolute;
+    z-index: 98;
+    width: 325px;
+    padding: 35px;
+    top: 210px;
+    left: 405px;
+    display: none;
+    box-shadow: 0px 6px 25px rgba(0,0,0,.5);
+}
+
+.tooltip h2 {
+  margin: 8px 0;
+  text-align: center;
+}
+
+.tooltip  p {
+   text-align: center;
+    font-size: 16px;
+    font-weight: 100;
+    line-height: 23px;
+    margin: 10px 0 20px;
+    color:#353535;
+}
+
+.tooltip input.txt {
+  background: #f3f3f5;
+    border: 1px solid #ccc;
+    width: 100%;
+    height: 45px;
+    border-radius: 6px;
+    padding-left: 5%;
+    font-size: 20px;
+    color:#555555;
+}
+
+.tooltip input.btn {
+  font-weight: bold;
+    background: none;
+    border: none;
+    font-size: 15px;
+    padding-top: 14px;
+    color: #d41920;
+}
+
+.tooltip .arrow-down {
+    width: 0px;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid #FFF;
+    left: 0;
+    right: 0;
+    position: absolute;
+    margin: 0 auto;
+    bottom: -15px;
+}
+
+.tooltip .tooltip-close {
+  float: right;
+    margin-right: -50px;
+    margin-top: -50px;
+    background: white;
+    border-radius: 100px;
+    box-shadow: 0 0 7px rgba(0,0,0,0.6);
+    padding: 6px;
+    padding-bottom: 3px;
+}
+
+.tooltip .tooltip-close img {
+  width: 12px;
+    padding: 7px;
+}
+
+input:focus, button:focus {outline:0;}
+
+.btn-intro {
+	font-size: 24px;
+    padding: 20px 40px;
+    font-weight: 600;
+    border-width: 3px;
+}
+
+
+/** Modal CSS **/
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,.8);
+  z-index: 99999;
+  opacity:0;
+  -webkit-transition: opacity 400ms ease-in;
+  -moz-transition: opacity 400ms ease-in;
+  transition: opacity 400ms ease-in;
+  pointer-events: none;
+  width: 1024px;
+  height: 768px;
+}
+
+
+.modal .home-modal {
+  width: 400px;
+    /* margin: 150px auto 0; */
+    background: white;
+    padding: 25px 25px 40px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0 auto;
+    right: 0;
+    left: 0;
+    color:#454545;
+}
+
+.modal .home-modal p {
+  font-size: 16px;
+  line-height: 25px;
+  color:#454545;
+}
+
+.modal .btn-outline {
+  border-color: #303A49;
+  color:#303A49;
+}
+
+.modal .btn-outline:hover {
+  border-color: #303A49;
+  color:#FFF;
+  background: #303A49;
+  font-weight: bold;
+}
+
+.modal .btn-escape {
+	display: inline-block;
+    padding: 16px 28px;
+    border-width: 3px;
+    color: #e50000;
+    border-color: #e50000;
+    font-size: 18px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.modal .btn-escape:hover {
+	border: 3px solid #fff;
+	background: #e50000;
+	color:#FFF;
+}
+
+.modal:target {
+  opacity:1;
+  pointer-events: auto;
+}
+
+.modal .close {
+  float: right;
+  margin-right: -40px;
+  margin-top: -40px;
+  background: white;
+  border-radius: 100px;
+  box-shadow: 0 0 7px rgba(0,0,0,0.6);
+  padding: 6px;
+  padding-bottom: 3px;
+}
+
+.modal .close a {
+  padding: 0;
+}
+
+.modal .close a img {
+  width: 12px;
+  padding: 7px 6px 5px 7px;
+}
+
+.dropped{
+  width:100%;
+  height:100%;
+}
+
+
+.fadeOut {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s .5s, opacity .5s linear;
+}
+
+
+.pre-final-screen h1 {
+  text-align: center;
+  margin-top: 0px;
+  text-shadow: 0 4px 0px #272c35;
+}
+
+.pre-final-screen p {
+  text-align: center;
+  font-size: 21px;
+  margin-bottom: 30px;
+  font-weight: 100;
+}
+
+.pre-final-screen .graphic ul li span {
+	font-size: 30px;
+    font-weight: bold;
+    display: inline-block;
+    width: 85px;
+    text-shadow: 0 4px 0px #272c35;
+}
+
+.pre-final-screen .graphic ul {
+	margin:40px 0;
+}
+
+.pre-final-screen .graphic ul li span.red {
+	color:red;
+}
+
+.pre-final-screen .graphic ul li span.green {
+	color:green;
+}
+
+.pre-final-screen .graphic ul li span.grey {
+	color:white;
+}
+
+.pre-final-screen .graphic ul li {
+	font-size: 18px;
+    font-weight: bold;
+    color:white;
+    list-style: none;
+    width: 190px;
+    text-shadow: 0 4px 0px #272c35;
+    margin-bottom: 10px;
+}
+
+.pre-final-screen .note p {
+	text-align: center;
+    line-height: 30px;
+    font-size: 21px;
+    font-weight: 100;
+}
+
+.final-done-screen {
+  background: url(../assets/prisons-funfact-bg@2x.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.final-done-screen .other-reason {
+  position: absolute;
+    top: 30%;
+    margin: 0 auto;
+    right: 0;
+    left: 0;
+    width: 75%;
+}
+
+.final-done-screen .other-reason h1 {
+  font-weight: 200;
+  text-align: center;
+  color:white;
+  line-height:50px;
+  font-size: 30px;
+}
+
+.final-done-screen .btn-area {
+  position: absolute;
+    right: 0;
+    left: 0;
+    text-align: center;
+    bottom: 265px;
+}
+
+.final-done-screen .btn-area a.btn {
+  display: inline-block;
+    font-weight: bold;
+    padding: 25px;
+    width: 100px;
+    border-width: 3px;
+    font-size: 18px;
+}

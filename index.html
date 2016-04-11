@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="css/main.css" title="Main" type="text/css" media="screen" charset="utf-8">
+        <link rel="stylesheet" href="css/animate.css" title="Animate" type="text/css" media="screen" charset="utf-8">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.css" title="jQuery UI" type="text/css" media="screen" charset="utf-8">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="home-icon faded">
+                <a href="javascript: void(0);" id="modal-link"  data-linkto="index.html" style="padding:0px;">
+	                <img src="//staging.interactivemechanics.com/esp-letters/assets/icon-home.svg" width="32" />
+                </a>
+            </div>
+        
+            <div class="screen home-screen" id="home" style="z-index: 6">
+                <div class="padded-box">
+                    <div class="navigation">
+                        <div class="next-button right">
+                            <a class="btn btn-outline next rounded next-button disabled" style="display:none;" data-divclass=".home-screen" href="javascript:void(0)">
+                            Continue &#8594;
+                            </a>
+                        </div>
+                        <br style="clear:right" />
+                    </div>
+                    <h1>What are prisons for?</h1>
+                    <p class="main-screen-intro">
+                        Sociologists agree: prisons are created with four "official" purposes.<br /> Take a moment to explore these rationales. Then share your thoughts.
+                    </p>
+                    <div class="bordered-boxes">
+                        <ul class="squareGroup" id="holder">
+                            <li class="squaredotted" id="large">
+                                <div style="width:205px; height: 205px; border: 1px dotted #eee;" class='snappable'>
+                                </div>
+                            </li>
+                            <li class="squaredotted" id="medium">
+                                <div class="" style="width:175px; height: 175px; border: 1px dotted #eee">
+                                </div>
+                            </li>
+                            <li class="squaredotted" id="small">
+                                <div class="" style="width:145px; height: 145px; border: 1px dotted #eee">
+                                </div>
+                            </li>
+                            <li class="squaredotted" id="tiny">
+                                <div class="" style="width:112px; height: 112px; border: 1px dotted #eee">
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="" style="position: absolute; text-align: left; top: 50%; transform: translateY(-50%); left: 760px; font-weight: bold; font-size: 15px; opacity: .7; font-style: italic;">
+                            <p>Least<br />Important</p>
+                        </div>
+                        <div class="" style="position: absolute; text-align: left; top: 50%; transform: translateY(-50%); left: -95px; font-weight: bold; font-size: 15px; opacity: .7; font-style: italic;">
+                            <p>Most<br />Important</p>
+                        </div>
+                    </div>
+                    <div class="card-wrapper animation">
+                        <ul>
+                            <li class="square">
+                                <div class="container">
+                                    <div class="card" id="incapacitation-icon" data-type="incapacitation">
+                                        <div class="front" id=''>
+                                            <img src="assets/icons/icon-incapacitation.svg" width="100%" />
+                                            <div class="more-info">
+                                                <img src="assets/icon-info.svg" />
+                                            </div>
+                                        </div>
+                                        <div class="back">
+                                            <section>
+                                                <h4>Incapacitation</h4>
+                                                <p>Confining Dangerous People</p>
+                                            </section>
+                                            <div class="close-icon">
+                                                <img src="http://interactivemechanics.com/Holiday2015/images/button-close.svg" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="square">
+                                <div class="container">
+                                    <div class="card" id="deterrence-icon" data-type="deterrence">
+                                        <div class="front">
+                                            <img src="assets/icons/icon-deterrence.svg" width="100%" />
+                                            <div class="more-info">
+                                                <img src="assets/icon-info.svg" />
+                                            </div>
+                                        </div>
+                                        <div class="back">
+                                            <section>
+                                                <h4>Deterrence</h4>
+                                                <p>Setting an Example</p>
+                                            </section>
+                                            <div class="close-icon">
+                                                <img src="http://interactivemechanics.com/Holiday2015/images/button-close.svg" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="square">
+                                <div class="container">
+                                    <div class="card" id="rehabilitation-icon" data-type="rehabilitation">
+                                        <div class="front">
+                                            <img src="assets/icons/icon-rehabilitation.svg" width="100%" />
+                                            <div class="more-info">
+                                                <img src="assets/icon-info.svg" />
+                                            </div>
+                                        </div>
+                                        <div class="back">
+                                            <section>
+                                                <h4>Rehabilitation</h4>
+                                                <p>Breaking the Cycle of Crime</p>
+                                            </section>
+                                            <div class="close-icon">
+                                                <img src="http://interactivemechanics.com/Holiday2015/images/button-close.svg" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="square" style="margin-right:0;">
+                                <div class="container">
+                                    <div class="card" id="retribution-icon" data-type="retribution">
+                                        <div class="front">
+                                            <img src="assets/icons/icon-retribution.svg" width="100%" />
+                                            <div class="more-info">
+                                                <img src="assets/icon-info.svg" />
+                                            </div>
+                                        </div>
+                                        <div class="back">
+                                            <section>
+                                                <h4>Retribution</h4>
+                                                <p>An Eye for An Eye</p>
+                                            </section>
+                                            <div class="close-icon">
+                                                <img src="http://interactivemechanics.com/Holiday2015/images/button-close.svg" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="" style="text-align: center;position: absolute;margin: 0 auto;left: 0;right: 0;bottom: 150px;">
+                        <a class="btn btn-outline btn-intro" href="javascript: void(0);">
+                        Let's get started &nbsp;&nbsp; &#8594;
+                        </a>
+                    </div>
+                    <div class='bottom-row'>
+                        <ul >
+                            <li class="square" id='Incapacitation'>
+                                <div class="container">
+                                    <div class="card" id="incapacitation-icon">
+                                        <div class="front" id=''>
+                                            <img src="assets/icons/icon-incapacitation.svg" width="100%" />
+                                            <div class="more-info">
+                                                <img src="assets/icon-info.svg" />
+                                            </div>
+                                        </div>
+                                        <div class="back">
+                                            <section>
+                                                <h4>Incapacitation</h4>
+                                                <p>Confining Dangerous People</p>
+                                            </section>
+                                            <div class="close-icon">
+                                                <img src="http://interactivemechanics.com/Holiday2015/images/button-close.svg" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="square" id='Deterrence'>
+                                <div class="container">
+                                    <div class="card" id="deterrence-icon">
+                                        <div class="front">
+                                            <img src="assets/icons/icon-deterrence.svg" width="100%" />
+                                            <div class="more-info">
+                                                <img src="assets/icon-info.svg" />
+                                            </div>
+                                        </div>
+                                        <div class="back">
+                                            <section>
+                                                <h4>Deterrence</h4>
+                                                <p>Setting an Example</p>
+                                            </section>
+                                            <div class="close-icon">x</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="square" id='Rehabilitation'>
+                                <div class="container">
+                                    <div class="card" id="rehabilitation-icon">
+                                        <div class="front">
+                                            <img src="assets/icons/icon-rehabilitation.svg" width="100%" />
+                                            <div class="more-info">
+                                                <img src="assets/icon-info.svg" />
+                                            </div>
+                                        </div>
+                                        <div class="back">
+                                            <section>
+                                                <h4>Rehabilitation</h4>
+                                                <p>Breaking the Cycle of Crime</p>
+                                            </section>
+                                            <div class="close-icon">x</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="square" id='Retribution' style="margin-right:0;">
+                                <div class="container">
+                                    <div class="card" id="retribution-icon">
+                                        <div class="front">
+                                            <img src="assets/icons/icon-retribution.svg" width="100%" />
+                                            <div class="more-info">
+                                                <img src="assets/icon-info.svg" />
+                                            </div>
+                                        </div>
+                                        <div class="back">
+                                            <section>
+                                                <h4>Retribution</h4>
+                                                <p>An Eye for An Eye</p>
+                                            </section>
+                                            <div class="close-icon">x</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="screen did-you-know-screen" style="z-index: 5; display:none;">
+                <div class="padded-box">
+                    <div class="navigation" style="">
+                        <div class="next-button right">
+                            <a class="btn btn-outline next rounded next-button" data-divclass=".did-you-know-screen" href="javascript:void(0)">
+                            Continue &#8594;
+                            </a>
+                        </div>
+                        <br style="clear:right" />
+                    </div>
+                    <div class="did-you-know">
+                        <div class="selected-square">
+                            <img src="assets/icons/icon-rehabilitation.svg" width="100%" />
+                        </div>
+                        <div class="details">
+                            <h1>Did you know?</h1>
+                            <p>
+                                
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="screen pie-stat-screen" style="z-index: 4;  display:none;">
+                <div class="padded-box">
+                    <div class="chart-detail">
+                        <div class="pie-chart">
+                            <canvas id="chart" width="375" height="275"></canvas>
+                            <div id="ChartLegend" class="chart-legend">
+                            </div>
+                        </div>
+                        <div class="detail">
+                            <h1>
+                                <span class="percentage">87% of visitors</span> agree that <span class="underline blue">rehabilitation</span> should be the most important role of prisons.
+                            </h1>
+                        </div>
+                        <br style="clear:both;" />
+                    </div>
+                    <div class="question-section">
+                        <div class="question">
+                            <h1>
+                                Do you think that American prisons <em>reflect that value</em>?
+                            </h1>
+                        </div>
+                        <div class="options">
+                            <button class="btn btn-outline">
+                            Yes
+                            </button>
+                            <button class="btn btn-outline">
+                            No
+                            </button>
+                            <button class="btn btn-outline">
+                            Unsure
+                            </button>
+                        </div>
+                    </div>
+                    <div class="navigation">
+                        <div class="next-button right">
+                            <a class="btn btn-outline next rounded next-button disabled" data-divclass=".pie-stat-screen" href="javascript:void(0)">
+                            Continue &#8594;
+                            </a>
+                        </div>
+                        <br style="clear:right" />
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="screen other-reason-screen" style="z-index:3;  display:none;">
+                <div class="padded-box">
+                    <div class="other-reason">
+                        <h1>
+                            Some people believe that <span class="underline">other factors</span> have helped feed the recent prison boom.
+                        </h1>
+                    </div>
+                    <div class="btn-area">
+                        <a class="btn btn-outline btn-else next" data-divclass=".other-reason-screen" href="javascript: void(0);">
+                        <em>Why else</em> do prisons exist &nbsp;&nbsp; &#8594;
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="screen why-else-screen" style="z-index: 2;  display:none;">
+                <div class="padded-box">
+                    <h1>
+                        <em>Why else</em> do prisons exist?
+                    </h1>
+                    <p>
+                        Some critics say that other objectives helped drive the prison boom. <br /> Do you think any of these have contributed?
+                    </p>
+                    <p style="font-size: 15px; line-height: 20px; text-align: center; font-style: italic; margin: 0px;">
+	                    <span>(Select one or more.)</span>
+                    </p>
+                    
+                    <div class="reason-options" data-clicked="false">
+                        <ul>
+                            <li class="active economic" data-type="economic">
+                                <img src="assets/icons/icon-economic.svg" width="100%" />
+                            </li>
+                            <li class="active racial" data-type="racial">
+                                <img src="assets/icons/icon-racial.svg" width="100%" />
+                            </li>
+                            <li class="active poverty" data-type="hidingpoverty">
+                                <img src="assets/icons/icon-hidingpoverty.svg" width="100%" />
+                            </li>
+                            <li class="active nootherreason" data-type="nootherreason">
+                                <img src="assets/icons/icon-nootherreason.svg" width="100%" />
+                            </li>
+                            <li class="tooltip-li active somethingelse" data-type="somethingelse">
+                                <img src="assets/icons/icon-somethingelse.svg" width="100%" />
+                            </li>
+                        </ul>
+                        <div class="tooltip">
+                            <div class="tooltip-close">
+                                <a href="#close">
+                                <img src="http://interactivemechanics.com/Holiday2015/images/button-close.svg" />
+                                </a>
+                            </div>
+                            <h2>Something else?</h2>
+                            <p>Have another factor in mind? Add it here, <br /> and we'll review to see if we should add it in.</p>
+                            <div class="form">
+                                <div style="float:left; width:75%;">
+                                    <input type="text" value="" placeholder="Enter your reason" class="txt" />
+                                </div>
+                                <div style="float:right; width:20%;">
+                                    <input type="button" value="ADD"  class="btn" />
+                                </div>
+                                <br style="clear:both;" />
+                            </div>
+                            <div class="arrow-down"></div>
+                        </div>
+                    </div>
+                    <div class="navigation">
+                        <div class="next-button right">
+                            <a class="btn btn-outline next rounded next-button" data-divclass=".why-else-screen" href="javascript:void(0)">
+                            Continue &#8594;
+                            </a>
+                        </div>
+                        <br style="clear:right" />
+                    </div>
+                </div>
+            </div>
+        
+        
+            <div class="screen pre-final-screen" style="z-index: 1;">
+                <div class="padded-box">
+                    <h1>
+                        <em>Why else</em> do prisons exist?
+                    </h1>
+                    <p>
+                        Some critics say that other objectives helped drive the prison boom. <br /> Do you think any of these have contributed?
+                    </p>
+                    <div class="top-final-row">
+                        <div class="first-section" style="width:25%; float:left; margin:0 4% 50px; display: none;">
+                            <div style="padding: 0%;">
+                                <div class="graphic most-important-graphic">
+                                    <img src="assets/icons/icon-rehabilitation.svg" width="100%" />
+                                </div>
+                                <div class="note">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="second-section" style="width:25%; float:left; margin:0 4% 50px;display: none;">
+                            <div style="padding: 0%;">
+                                <div class="graphic">
+                                    <ul>
+                                        <li class="not-valued"><span class="larger red">0%</span> Not Valued</li>
+                                        <li class="unsure"><span class="larger grey">0%</span> Unsure</li>
+                                        <li class="is-valued"><span class="larger green">0%</span> Is Valued</li>
+                                    </ul>
+                                </div>
+                                <div class="note">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="third-section" style="width:25%; float:left; margin-left:4%; margin-bottom:50px;display: none;">
+                            <div style="padding: 0%;">
+                                <div class="graphic factor-graphic">
+                                    <img src="assets/icons/icon-deterrence.svg" width="100%" />
+                                </div>
+                                <div class="note">
+                                </div>
+                            </div>
+                        </div>
+                        <br style="clear:left;" />
+                    </div>
+                    <div class="top-final-row">
+                        <div class="first-section" style="width:25%; float:left; margin:0 4%;display: none;">
+                            <div style="padding: 0%;">
+                                <div class="note most-important-note">
+                                    <p>
+                                        87% of visitors think that <strong>Rehabilitation</strong> should be the highest priority of our prison system.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="second-section" style="width:25%; float:left; margin:0 4%;display: none;">
+                            <div style="padding: 0%;">
+                                <div class="note values-note">
+                                    <p>
+                                        ..... and 86% of those visitors think that <strong>Rehabilitation is not valued</strong> enough
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="third-section" style="width:25%; float:left; margin-left:4%;display: none;">
+                            <div style="padding: 0%;">
+                                <div class="note factor-note">
+                                    <p>54% of visitors think that <strong>profit motive</strong> has contributed to the recent prison boom.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <br style="clear:left;" />
+                    </div>
+                    <div class="navigation">
+                        <div class="next-button right">
+                            <a class="btn btn-outline next rounded next-button disabled" data-divclass=".pre-final-screen" href="javascript:void(0)">
+                            Continue &#8594;
+                            </a>
+                        </div>
+                        <br style="clear:right" />
+                    </div>
+                </div>
+            </div>
+        
+        
+            <div class="screen final-done-screen" style="z-index: 0;">
+                <div class="padded-box">
+                    <div class="other-reason">
+                        <h1>
+                            As you continue through this exhibit, ask yourself: <br /> <strong><span style="border-bottom: 4px solid red;">Who decides</span> on the priorities of our prison system?</strong>
+                        </h1>
+                    </div>
+                    <div class="btn-area">
+                        <a class="btn btn-outline btn-else btn-finish next" href="javascript: void(0);">
+                        Finish
+                        </a>
+                    </div>
+                    <div style="position: absolute; bottom: 50px; left:50px;">
+                        <img src="./assets/prisons-today-logo@2x.png" width="275px" style="opacity: .5;" />
+                    </div>
+                    <div style="position: absolute; bottom: 50px; right:50px;">
+                        <img src="./assets/eastern-state-logo@2x.png" width="275px" style="opacity: .5;" />
+                    </div>
+                </div>
+            </div>
+        
+            <!--- Open Modal -->
+            
+            <div id="open-modal" class="modal">
+                <div>
+                    <div class="home-modal">
+                        <div class="close">
+                            <a href="#close">
+	                             <img src="http://interactivemechanics.com/Holiday2015/images/button-close.svg" />
+                            </a>
+                        </div>
+                        <div style="text-align:center; color:#454545 !important;">
+                            <h2>
+                                Return to the beginning
+                            </h2>
+                            <p>
+                                Are you sure you want to go back to the beginning? <br /> All progress will be lost.
+                            </p>
+                            <a class="btn btn-outline btn-escape" href="./index.html">
+                            Back to home
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
