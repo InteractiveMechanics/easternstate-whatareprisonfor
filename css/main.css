@@ -107,7 +107,7 @@ body {
 .card-wrapper .card .back h4{
   font-size: 20px;
   color:#FFFFFF;
-  margin-bottom:5px;
+  margin-bottom:10px;
   font-weight: bold;
 }
 
@@ -122,7 +122,7 @@ body {
   font-weight: 200;
   color:white;
   margin: 0px;
-  line-height: 30px;
+  line-height: 24px;
 }
 
 .card-wrapper .card.flip .front {
@@ -278,7 +278,7 @@ body {
 .bordered-boxes ul li {
     display: inline-block;
     vertical-align: middle;
-    margin-right: 4%;
+    margin-right: 3.55%;
 }
 
 /** Did you know screen ***/
@@ -294,12 +294,12 @@ body {
   background-size: cover;
 }
 .did-you-know-screen .selected-square {
-  width: 15%;
+  width: 20%;
+  transform: rotate(-5deg);
 }
 
 .did-you-know-screen .details {
   width: 65%;
-  padding-left: 6%;
 }
 
 .did-you-know-screen .details h1, p{
@@ -335,7 +335,7 @@ span.underline {
   float: left;
 }
 .pie-stat-screen .question {
-  margin-top:110px;
+  margin-top:35px;
 }
 
 .pie-stat-screen .chart-detail .detail {
@@ -381,7 +381,8 @@ span.underline {
 .pie-stat-screen h1 {
   font-weight: 200;
   text-align: center;
-  font-size: 35px;
+  line-height: 45px;
+  font-size: 30px;
 }
 
 .pie-stat-screen button {
@@ -455,7 +456,7 @@ span.underline {
 
 .why-else-screen p {
   text-align: center;
-  font-size: 21px;
+  font-size: 20px;
   margin-bottom: 10px;
   font-weight: 100;
   line-height: 32px;
@@ -888,7 +889,7 @@ input:focus, button:focus {outline:0;}
 }
 
 .final-done-screen {
-  background: url(../assets/prisons-funfact-bg@2x.jpg);
+  background: url(../assets/prisons-ending-bg@2x.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 }

@@ -9,6 +9,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.css" type="text/css" media="screen" charset="utf-8">
     </head>
     <body>
         <div class="wrapper">
@@ -18,7 +20,7 @@
                 </a>
             </div>
         
-            <div class="screen home-screen" id="home" style="z-index: 6">
+            <div class="screen home-screen" id="home" style="z-index: 7;">
                 <div class="padded-box">
                     <div class="navigation">
                         <div class="next-button right">
@@ -30,7 +32,7 @@
                     </div>
                     <h1>What are prisons for?</h1>
                     <p class="main-screen-intro">
-                        Sociologists agree: prisons are created with four "official" purposes.<br /> Take a moment to explore these rationales. Then share your thoughts.
+                        Prisons exist&mdash;officially&mdash;for only four reasons. Which do you think is the most important?
                     </p>
                     <div class="bordered-boxes">
                         <ul class="squareGroup" id="holder">
@@ -54,7 +56,7 @@
                         <div class="" style="position: absolute; text-align: left; top: 50%; transform: translateY(-50%); left: 760px; font-weight: bold; font-size: 15px; opacity: .7; font-style: italic;">
                             <p>Least<br />Important</p>
                         </div>
-                        <div class="" style="position: absolute; text-align: left; top: 50%; transform: translateY(-50%); left: -95px; font-weight: bold; font-size: 15px; opacity: .7; font-style: italic;">
+                        <div class="" style="position: absolute; text-align: right; top: 50%; transform: translateY(-50%); left: -95px; font-weight: bold; font-size: 15px; opacity: .7; font-style: italic;">
                             <p>Most<br />Important</p>
                         </div>
                     </div>
@@ -237,7 +239,7 @@
             </div>
             
             
-            <div class="screen did-you-know-screen" style="z-index: 5; display:none;">
+            <div class="screen did-you-know-screen" style="z-index: 6; display:none;">
                 <div class="padded-box">
                     <div class="navigation" style="">
                         <div class="next-button right">
@@ -248,21 +250,22 @@
                         <br style="clear:right" />
                     </div>
                     <div class="did-you-know">
-                        <div class="selected-square">
-                            <img src="assets/icons/icon-rehabilitation.svg" width="100%" />
-                        </div>
                         <div class="details">
                             <h1>Did you know?</h1>
                             <p>
                                 
                             </p>
                         </div>
+                        
+                        <div class="selected-square">
+                            <img src="assets/icons/icon-rehabilitation.svg" width="100%" />
+                        </div>
                     </div>
                 </div>
             </div>
             
             
-            <div class="screen pie-stat-screen" style="z-index: 4;  display:none;">
+            <div class="screen pie-stat-screen" style="z-index: 5;  display:none;">
                 <div class="padded-box">
                     <div class="chart-detail">
                         <div class="pie-chart">
@@ -277,10 +280,11 @@
                         </div>
                         <br style="clear:both;" />
                     </div>
-                    <div class="question-section">
+                    <div class="question-section" style="display: none;">
                         <div class="question">
                             <h1>
-                                Do you think that American prisons <em>reflect that value</em>?
+                                Do you think that American prisons <br />
+                                value <span class='value-enough'></span> enough?
                             </h1>
                         </div>
                         <div class="options">
@@ -307,11 +311,11 @@
             </div>
 
 
-            <div class="screen other-reason-screen" style="z-index:3;  display:none;">
+            <div class="screen other-reason-screen" style="z-index:4;  display:none;">
                 <div class="padded-box">
                     <div class="other-reason">
                         <h1>
-                            Some people believe that <span class="underline">other factors</span> have helped feed the recent prison boom.
+	                        Some people say that <strong>other, unspoken factors</strong> drove the recent prison boom."
                         </h1>
                     </div>
                     <div class="btn-area">
@@ -323,15 +327,15 @@
             </div>
 
 
-            <div class="screen why-else-screen" style="z-index: 2;  display:none;">
+            <div class="screen why-else-screen" style="z-index: 3;  display:none;">
                 <div class="padded-box">
                     <h1>
                         <em>Why else</em> do prisons exist?
                     </h1>
                     <p>
-                        Some critics say that other objectives helped drive the prison boom. <br /> Do you think any of these have contributed?
+                        Some people say that other, unspoken factors drove the recent prison boom. <br /> Do you think any of these have contributed?
                     </p>
-                    <p style="font-size: 15px; line-height: 20px; text-align: center; font-style: italic; margin: 0px;">
+                    <p style="font-size: 20px; line-height: 20px; text-align: center; font-style: italic; margin: 0px;">
 	                    <span>(Select one or more.)</span>
                     </p>
                     
@@ -383,16 +387,49 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="screen final-screen" style="z-index: 2;  display:none;">
+				
+				<div class="padded-box">
+					
+					<h1>
+						Prison exist for other reasons
+					</h1>
+					
+					<p>
+						Some critics say that other objectives helped drive the prison boom. <br /> Do you think any of these have contributed?
+					</p>
+					
+					<div class="final-chart">
+						
+						<div class="pie-graph">
+							<canvas id="final-pie-chart" width="600" height="400"></canvas>
+						</div>
+						
+						<div id="FinalChartLegend" class="final-chart-legend">
+									
+						</div>
+					</div>
+					
+					<div class="navigation">
+                        <div class="next-button right">
+                            <a class="btn btn-outline next rounded next-button" data-divclass=".final-screen" href="javascript:void(0)">
+                            Continue &#8594;
+                            </a>
+                        </div>
+                        <br style="clear:right" />
+                    </div>
+					
+				</div>
+			</div>
         
         
             <div class="screen pre-final-screen" style="z-index: 1;">
                 <div class="padded-box">
                     <h1>
-                        <em>Why else</em> do prisons exist?
+                        Most of Our Visitors Think...
                     </h1>
-                    <p>
-                        Some critics say that other objectives helped drive the prison boom. <br /> Do you think any of these have contributed?
-                    </p>
+                    <br />
                     <div class="top-final-row">
                         <div class="first-section" style="width:25%; float:left; margin:0 4% 50px; display: none;">
                             <div style="padding: 0%;">
@@ -505,7 +542,7 @@
                             <p>
                                 Are you sure you want to go back to the beginning? <br /> All progress will be lost.
                             </p>
-                            <a class="btn btn-outline btn-escape" href="./index.html">
+                            <a class="btn btn-outline btn-escape btn-back-home" href="javascript: void(0);">
                             Back to home
                             </a>
                         </div>
