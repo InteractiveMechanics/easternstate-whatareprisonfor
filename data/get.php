@@ -138,7 +138,7 @@
 	
 	
 	/** Other Reason Pie Info and Percent Data **/
-	$q = "Select COALESCE((Select Count(*) From esp_prisons where profit_motives_selected = 1), 0) as profit_count, COALESCE((Select Count(*) From esp_prisons where racial_control_selected = 1),0) as racial_count, COALESCE((Select Count(*) From esp_prisons where addiction_poverty_selected = 1), 0) as poverty_count, COALESCE((Select Count(*) From esp_prisons where no_objective_selected = 1),0) as no_objective_count, (COALESCE((Select Count(*) From esp_prisons where profit_motives_selected = 1), 0) + COALESCE((Select Count(*) From esp_prisons where racial_control_selected = 1),0) + COALESCE((Select Count(*) From esp_prisons where addiction_poverty_selected = 1), 0) + COALESCE((Select Count(*) From esp_prisons where no_objective_selected = 1), 0)) as total_count From esp_prisons LIMIT 1";
+	$q = "Select COALESCE((Select Count(*) From esp_prisons where profit_motives_selected = 1), 0) as profit_count, COALESCE((Select Count(*) From esp_prisons where racial_control_selected = 1),0) as racial_count, COALESCE((Select Count(*) From esp_prisons where addiction_poverty_selected = 1), 0) as poverty_count, COALESCE((Select Count(*) From esp_prisons where no_objective_selected = 1),0) as no_objective_count, COALESCE((Select Count(*) From esp_prisons where something_else_selected = 1),0) as something_else_count, (COALESCE((Select Count(*) From esp_prisons where profit_motives_selected = 1), 0) + COALESCE((Select Count(*) From esp_prisons where racial_control_selected = 1),0) + COALESCE((Select Count(*) From esp_prisons where addiction_poverty_selected = 1), 0) + COALESCE((Select Count(*) From esp_prisons where no_objective_selected = 1), 0)) as total_count From esp_prisons LIMIT 1";
 	
 	$query = mysqli_query($con, $q);
 	$other_reasons = array();
@@ -149,7 +149,7 @@
 		if(isset($row['profit_count'])) {
 			
 			array_push($profit, array(
-				'name' => 'Profit Motive',
+				'name' => 'Profit Motives',
 				'count' => $row['profit_count'],
 				'percent' => (($row['profit_count'] / $row['total_count']) * 100)
 			));
@@ -160,7 +160,7 @@
 		if(isset($row['racial_count'])) {
 			
 			array_push($racial, array(
-				'name' => 'Racial',
+				'name' => 'Racial / Political Control',
 				'count' => $row['racial_count'],
 				'percent' => (($row['racial_count'] / $row['total_count']) * 100)
 			));
@@ -171,7 +171,7 @@
 		if(isset($row['poverty_count'])) {
 			
 			array_push($poverty, array(
-				'name' => 'Poverty',
+				'name' => 'Hiding Addiction & Poverty',
 				'count' => $row['poverty_count'],
 				'percent' => (($row['poverty_count'] / $row['total_count']) * 100)
 			));
@@ -182,9 +182,20 @@
 		if(isset($row['no_objective_count'])) {
 			
 			array_push($objective, array(
-				'name' => 'No Other Reason',
+				'name' => 'No Other Objectives',
 				'count' => $row['no_objective_count'],
 				'percent' => (($row['no_objective_count'] / $row['total_count']) * 100)
+			));
+		
+		}
+		
+		$something = array();
+		if(isset($row['something_else_count'])) {
+			
+			array_push($something, array(
+				'name' => 'Something Else',
+				'count' => $row['something_else_count'],
+				'percent' => (($row['something_else_count'] / $row['total_count']) * 100)
 			));
 		
 		}
@@ -193,7 +204,8 @@
 			'poverty' => $poverty,
 			'racial' => $racial,
 			'profit' => $profit,
-			'objective' => $objective
+			'objective' => $objective,
+			'something_else' => $something
 		));
 		
 	};
@@ -216,7 +228,7 @@
 		
 		if($value == $row["profit_percent"]) {
 			return array(
-				'other_factor' => 'Profit Motive',
+				'other_factor' => 'Profit Motives',
 				'percent' => $value
 			);
 		}

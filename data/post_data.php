@@ -27,11 +27,12 @@
 	$racial = make_safe($_POST['racial_control_selected']);
 	$poverty = make_safe($_POST['addiction_poverty_selected']);
 	$objective = make_safe($_POST['no_objective_selected']);
+	$something = make_safe($_POST['something_else_selected']);
 	$something_else = make_safe($_POST['something_else']);
 	$web_or_exhibit = make_safe($_POST['web_or_exhibit']);
     
     
-    $sql = "INSERT INTO `esp_prisons` (`id`, `date_created`, `most_important`, `second_most_important`, `third_most_important`, `least_important`, `value_reflected`, `profit_motives_selected`, `racial_control_selected`, `addiction_poverty_selected`, `no_objective_selected`, `something_else`, `web_or_exhibit`) VALUES ('', NOW(), '$most', '$second', '$third', '$least', '$value', '$profit', '$racial', '$poverty', '$objective', '$something_else', '$web_or_exhibit')";
+    $sql = "INSERT INTO `esp_prisons` (`id`, `date_created`, `most_important`, `second_most_important`, `third_most_important`, `least_important`, `value_reflected`, `profit_motives_selected`, `racial_control_selected`, `addiction_poverty_selected`, `no_objective_selected`, `something_else_selected`, `something_else`, `web_or_exhibit`) VALUES ('', NOW(), '$most', '$second', '$third', '$least', '$value', '$profit', '$racial', '$poverty', '$objective', '$something', '$something_else', '$web_or_exhibit')";
     
     $query = mysqli_query($con, $sql);
 	$row = mysqli_fetch_row($query); 

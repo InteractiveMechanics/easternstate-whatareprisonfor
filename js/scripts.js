@@ -1,9 +1,11 @@
 var pieData = [ { value: 86, color:"#198cff", label: "Rehabilitation" }, { value : 8, color : "#C1ECFA", label: "Deterrence" }, { value : 3, color : "#FFAAAA", label: "Retribution" }, { value : 3, color : "#FF0000", label: "Incapacitation" } ];
 var pieOptions = { segmentShowStroke : false, animation: false }
 
+var idleTime = 0;
+
 var intervalID;
 
-var incapacitation_text = "Eastern State Penitentiary housed a maximum&mdash;security population convicted of serious crimes, including assault, armed robbery and murder. The courts sent these men and women here &mdash;<span class='underline'>incapacitating</span> them-to increase public safety.";
+var incapacitation_text = "Eastern State Penitentiary housed a maximum-security population convicted of serious crimes, including assault, armed robbery and murder. The courts sent these men and women here&mdash;<span class='underline'>incapacitating</span> them&mdash;to increase public safety.";
 var incapacitation_image = "assets/icons/icon-incapacitation.svg";
 
 var deterrence_text = "The grim, castle-like walls of Eastern State Penitentiary were designed to intimidate. The designers wanted to frighten the general population&mdash;thus <span class='underline'>deterring</span> criminal behavior.";
@@ -22,7 +24,6 @@ var jsonData = JSON.parse('{"important_value":[{"most_important":"Deterrence","p
 var interactiveJsonData = {};
 var flipIndex = 0;
 
-
 var request = $.ajax({
   url: "./data/get.php",
   type: "GET",
@@ -34,8 +35,8 @@ request.done(function(data) {
 	interactiveJsonData = json_data;
 	
 	var value = json_data.important_value[0].value;
-	var percent = json_data.important_value[0].percent;
-	$('.most-important-note p').html(percent + '% of visitors think that <span class="underline">'+value+'</span> should be the highest priority of our prison system.');
+	var percent = parseInt(json_data.important_value[0].percent);
+	$('.most-important-note p').html(percent + '% of visitors think that <span class="underline">'+value+'</span> is the highest priority of our prison system.');
 	
 	var maxIndex = 0;
 	if(value == "Incapacitation") {
@@ -43,23 +44,26 @@ request.done(function(data) {
 	 	
 	 	maxIndex = getMaxPositionFromArray(json_data.incapacitation);
 	 	var sureness = surenessValue(json_data.incapacitation[maxIndex].value, value);
-	 	$('.values-note p').html('..... and '+ parseInt(json_data.incapacitation[maxIndex].percent) +'% of those visitors ' + sureness);
+	 	$('.values-note p').html('.... And '+ parseInt(json_data.incapacitation[maxIndex].percent) +'% ' + sureness);
 	 	
-	 	for(i = 0; i < json_data.incapacitation.length; i++) {
-			var item = json_data.incapacitation[i];
+	 	//for(i = 0; i < json_data.incapacitation.length; i++) {
+			var item = json_data.incapacitation[maxIndex];
 		
 			if(item.value == 'unsure') {
-				$('.graphic li.unsure').html('<span class="larger grey">'+ parseInt(item.percent) +'%</span> Unsure');
+				$('.graphic li.unsure').html('<span class="larger grey">'+ parseInt(item.percent) +'%</span> <br /> Unsure');
+				$('.graphic li.unsure').show();
 			}
 		
 			if(item.value == 'yes') {
-				$('.graphic li.is-valud').html('<span class="larger green">'+ parseInt(item.percent) +'%</span> Is Valued');
+				$('.graphic li.is-valued').html('<span class="larger green">'+ parseInt(item.percent) +'%</span> <br /> Effective');
+				$('.graphic li.is-valued').show();
 			}
 		
 			if(item.value == 'no') {
-				$('.graphic li.not-valued').html('<span class="larger red">'+ parseInt(item.percent) +'%</span> Not Valued');
+				$('.graphic li.not-valued').html('<span class="larger red">'+ parseInt(item.percent) +'%</span> <br /> Not Effective');
+				$('.graphic li.not-valued').show();
 			}
-		}
+		//}
  	}
  	
  	if(value == "Deterrence") {
@@ -67,23 +71,26 @@ request.done(function(data) {
 	 	
 	 	maxIndex = getMaxPositionFromArray(json_data.deterrence);
 	 	var sureness = surenessValue(json_data.deterrence[maxIndex].value, value);
-	 	$('.values-note p').html('..... and '+ parseInt(json_data.deterrence[maxIndex].percent) +'% of those visitors ' + sureness);
+	 	$('.values-note p').html('.... And '+ parseInt(json_data.deterrence[maxIndex].percent) +'% ' + sureness);
 	 	
-	 	for(i = 0; i < json_data.deterrence.length; i++) {
-			var item = json_data.deterrence[i];
+	 	//for(i = 0; i < json_data.deterrence.length; i++) {
+			var item = json_data.deterrence[maxIndex];
 		
 			if(item.value == 'unsure') {
-				$('.graphic li.unsure').html('<span class="larger grey">'+ parseInt(item.percent) +'%</span> Unsure');
+				$('.graphic li.unsure').html('<span class="larger grey">'+ parseInt(item.percent) +'%</span> <br /> Unsure');
+				$('.graphic li.unsure').show();
 			}
 		
 			if(item.value == 'yes') {
-				$('.graphic li.is-valued').html('<span class="larger green">'+ parseInt(item.percent) +'%</span> Is Valued');
+				$('.graphic li.is-valued').html('<span class="larger green">'+ parseInt(item.percent) +'%</span> <br /> Effective');
+				$('.graphic li.is-valued').show();
 			}
 		
 			if(item.value == 'no') {
-				$('.graphic li.not-valued').html('<span class="larger red">'+ parseInt(item.percent) +'%</span> Not Valued');
+				$('.graphic li.not-valued').html('<span class="larger red">'+ parseInt(item.percent) +'%</span> <br /> Not Effective');
+				$('.graphic li.not-valued').show();
 			}
-		}
+		//}
  	}
  	
  	if(value == "Rehabilitation") {
@@ -91,23 +98,26 @@ request.done(function(data) {
 	 	
 	 	maxIndex = getMaxPositionFromArray(json_data.rehabilitation);
 	 	var sureness = surenessValue(json_data.rehabilitation[maxIndex].value, value);
-	 	$('.values-note p').html('..... and '+ parseInt(json_data.rehabilitation[maxIndex].percent) +'% of those visitors ' + sureness);
+	 	$('.values-note p').html('.... And '+ parseInt(json_data.rehabilitation[maxIndex].percent) +'% ' + sureness);
 	 	
-	 	for(i = 0; i < json_data.rehabilitation.length; i++) {
-			var item = json_data.rehabilitation[i];
+	 	//for(i = 0; i < json_data.rehabilitation.length; i++) {
+			var item = json_data.rehabilitation[maxIndex];
 		
 			if(item.value == 'unsure') {
-				$('.graphic li.unsure').html('<span class="larger grey">'+ parseInt(item.percent) +'%</span> Unsure');
+				$('.graphic li.unsure').html('<span class="larger grey">'+ parseInt(item.percent) +'%</span> <br /> Unsure');
+				$('.graphic li.unsure').show();
 			}
 		
 			if(item.value == 'yes') {
-				$('.graphic li.is-valud').html('<span class="larger green">'+ parseInt(item.percent) +'%</span> Is Valued');
+				$('.graphic li.is-valued').html('<span class="larger green">'+ parseInt(item.percent) +'%</span> <br /> Effective');
+				$('.graphic li.is-valued').show();
 			}
 		
 			if(item.value == 'no') {
-				$('.graphic li.not-valued').html('<span class="larger red">'+ parseInt(item.percent) +'%</span> Not Valued');
+				$('.graphic li.not-valued').html('<span class="larger red">'+ parseInt(item.percent) +'%</span> <br /> Not Effective');
+				$('.graphic li.not-valued').show();
 			}
-		}
+		//}
  	}
  	
  	if(value == "Retribution") {
@@ -115,23 +125,26 @@ request.done(function(data) {
 	 	
 	 	maxIndex = getMaxPositionFromArray(json_data.retribution);
 	 	var sureness = surenessValue(json_data.retribution[maxIndex].value, value);
-	 	$('.values-note p').html('..... and '+ parseInt(json_data.retribution[maxIndex].percent) +'% of those visitors ' + sureness);
+	 	$('.values-note p').html('.... And '+ parseInt(json_data.retribution[maxIndex].percent) +'% ' + sureness);
 	 	
-	 	for(i = 0; i < json_data.retribution.length; i++) {
-			var item = json_data.retribution[i];
+	 	//for(i = 0; i < json_data.retribution.length; i++) {
+			var item = json_data.retribution[maxIndex];
 		
 			if(item.value == 'unsure') {
-				$('.graphic li.unsure').html('<span class="larger grey">'+ parseInt(item.percent) +'%</span> Unsure');
+				$('.graphic li.unsure').html('<span class="larger grey">'+ parseInt(item.percent) +'%</span> <br /> Unsure');
+				$('.graphic li.unsure').show();
 			}
 		
 			if(item.value == 'yes') {
-				$('.graphic li.is-valud').html('<span class="larger green">'+ parseInt(item.percent) +'%</span> Is Valued');
+				$('.graphic li.is-valued').html('<span class="larger green">'+ parseInt(item.percent) +'%</span> <br /> Effective');
+				$('.graphic li.is-valued').show();
 			}
 		
 			if(item.value == 'no') {
-				$('.graphic li.not-valued').html('<span class="larger red">'+ parseInt(item.percent) +'%</span> Not Valued');
+				$('.graphic li.not-valued').html('<span class="larger red">'+ parseInt(item.percent) +'%</span> <br /> Not Effective');
+				$('.graphic li.not-valued').show();
 			}
-		}
+		//}
  	}
  	
  	var max_obj = highestOtherReason(json_data.other_reasons[0]);
@@ -171,10 +184,12 @@ request.done(function(data) {
     console.log(other_reasons);
     
     var secondPieData = [ 
-		{ value: parseInt(other_reasons.objective[0].count), color:"#D31E2A", label: other_reasons.objective[0].name }, 
-		{ value : parseInt(other_reasons.poverty[0].count), color : "#E4777C", label: other_reasons.poverty[0].name }, 
-		{ value : parseInt(other_reasons.profit[0].count), color : "#811727", label: other_reasons.profit[0].name }, 
-		{ value : parseInt(other_reasons.racial[0].count), color : "#9D7E8B", label: other_reasons.racial[0].name } 
+	    { value : parseInt(other_reasons.profit[0].count), color : "#811727", label: other_reasons.profit[0].name },
+	    { value : parseInt(other_reasons.racial[0].count), color : "#9D7E8B", label: other_reasons.racial[0].name },
+	    { value : parseInt(other_reasons.poverty[0].count), color : "#E4777C", label: other_reasons.poverty[0].name },
+		{ value : parseInt(other_reasons.something_else[0].count), color : "#D31E2A", label: other_reasons.something_else[0].name },
+		{ value: parseInt(other_reasons.objective[0].count), color:"#D3D3D3", label: other_reasons.objective[0].name }
+		 
 	];
     
     var counties = document.getElementById("final-pie-chart").getContext("2d");
@@ -182,29 +197,172 @@ request.done(function(data) {
     document.getElementById('FinalChartLegend').innerHTML = myCountiesChart.generateLegend();
 });
 
+	function getUnderlineColor() {
+		if(interactiveJsonData.important_value[0].value == square_order[0]) {
+			return "#D31E2A";
+		}
+		
+		if(interactiveJsonData.important_value[1].value == square_order[0]) {
+			return "#E4777C";
+		}
+		
+		if(interactiveJsonData.important_value[2].value == square_order[0]) {
+			return "#811727";
+		}
+		
+		if(interactiveJsonData.important_value[3].value == square_order[0]) {
+			return "#9D7E8B";
+		}
+	}
+
 
 function surenessValue(value, term) {
-	if(value = 'no') {
-		return 'think that <span class="underline">'+ term  +'</span> is not valued enough';
-	}
+	
+	if(term == "Deterrence") {
+		
+		if(value = 'no') {
+		return 'of those visitors think that our prisons do not effectively deter crime.';
+		}
 
-	if(value = 'unsure') {
-		return 'aren\'t sure if <span class="underline">'+ term  +'</span> is valued enough';
-	}
+		if(value = 'unsure') {
+			return 'of those visitors are unsure if our prisons effectively deter crime.';
+		}
 
-	if(value = 'yes') {
-		return 'think that <span class="underline">'+ term  +'</span> is valued enough';
+		if(value = 'yes') {
+			return 'of those visitors think that our prisons effectively deter crime.';
+		}
+		
 	}
+	
+	if(term == "Rehabilitation") {
+		
+		if(value = 'no') {
+		return 'of those visitors think that our prisons do not effectively rehabilitate people.';
+		}
+
+		if(value = 'yes') {
+			return 'of those visitors think that our prisons effectively rehabilitate people.';
+		}
+
+		if(value = 'unsure') {
+			return 'of those visitors are unsure if our prisons effectively rehabilitate people.';
+		}
+		
+	}
+	
+	if(term == "Retribution") {
+		
+		if(value = 'no') {
+		return 'of those visitors think that our prisons do not provide appropriate retribution to lawbreakers.';
+		}
+
+		if(value = 'unsure') {
+			return 'of those visitors are unsure if our prisons provide appropriate retribution to lawbreakers.';
+		}
+
+		if(value = 'yes') {
+			return 'of those visitors think that our prisons provide appropriate retribution to lawbreakers.';
+		}
+		
+	}
+	
+	if(term == "Incapacitation") {
+		
+		if(value = 'yes') {
+		return 'of those visitors think that our prisons incapacitate dangerous people in effective and fair numbers.';
+		}
+
+		if(value = 'unsure') {
+			return 'of those visitors are unsure if our prisons incapacitate dangerous people in effective and fair numbers.';
+		}
+
+		if(value = 'no') {
+			return 'of those visitors think that our prisons do not incapacitate dangerous people in effective and fair numbers.';
+		}
+		
+	}
+	
 }
 
+
+function capture_data(redirect) {
+	var value_reflected = $('.options button.active').text().toLowerCase().trim();
+	
+	if(square_order.length > 0) {
+			
+	    if(redirect) {
+			var objRequest = {
+				'most_important': square_order[0],
+				'second_most_important': square_order[1],
+				'third_most_important': square_order[2],
+				'least_important': square_order[3],
+				'value_reflected': value_reflected ? value_reflected : '',
+				'profit_motives_selected': $('.reason-options li.economic').hasClass('selected') ? 1 : 0,
+				'racial_control_selected': $('.reason-options li.racial').hasClass('selected') ? 1 : 0,
+				'addiction_poverty_selected': $('.reason-options li.poverty').hasClass('selected') ? 1 : 0,
+				'no_objective_selected': $('.reason-options li.somethingelse').hasClass('selected') ? 1 : 0,
+				'something_else_selected': $('.reason-options li.nootherreason').hasClass('selected') ? 1 : 0,
+				'something_else': $('.reason-options li.somethingelse').hasClass('selected') ? $('input.txt').val() : '', 
+				'web_or_exhibit': 'web'
+			};
+		
+			var request = $.ajax({
+				url: "./data/post_data.php",
+				type: "POST",
+				data: objRequest,
+				dataType: "html"
+			});
+		
+			request.done(function(msg) {
+				window.location.href = window.location.pathname;
+			});
+		
+			request.fail(function(jqXHR, textStatus) {
+				window.location.href = window.location.pathname;
+			});		
+	    } else {
+		    var objRequest = {
+				'most_important': square_order[0],
+				'second_most_important': square_order[1],
+				'third_most_important': square_order[2],
+				'least_important': square_order[3],
+				'value_reflected': value_reflected ? value_reflected : '',
+				'profit_motives_selected': $('.reason-options li.economic').hasClass('selected') ? 1 : 0,
+				'racial_control_selected': $('.reason-options li.racial').hasClass('selected') ? 1 : 0,
+				'addiction_poverty_selected': $('.reason-options li.poverty').hasClass('selected') ? 1 : 0,
+				'no_objective_selected': $('.reason-options li.nootherreason').hasClass('selected') ? 1 : 0,
+				'something_else_selected': $('.reason-options li.somethingelse').hasClass('selected') ? 1 : 0,
+				'something_else': $('.reason-options li.somethingelse').hasClass('selected') ? $('input.txt').val() : '', 
+				'web_or_exhibit': 'web'
+			};
+		
+			var request = $.ajax({
+				url: "./data/post_data.php",
+				type: "POST",
+				data: objRequest,
+				dataType: "html"
+			});
+		
+			request.done(function(msg) {
+				console.log(msg);
+			});
+		
+			request.fail(function(jqXHR, textStatus) {
+				console.log(textStatus);
+			});
+	    }
+	    
+	}
+ }
+
 function getMaxPositionFromArray(arr) {
-	var maximum = arr[0].percent;
+	var maximum = parseInt(arr[0].percent);
 	var index = 0;
 	
 	
 	for(i = 1; i < arr.length; i++) {
 		if (arr[i].percent > maximum) {
-			maximum = arr[i].percent
+			maximum = parseInt(arr[i].percent);
 			index = i;
 		}
 		
@@ -279,9 +437,9 @@ function setViewBasedOnSqaure(value) {
 	for(var i = 0; i < important_values.length; i++) {
 		
 		if(important_values[i].most_important == value) {
-			
+			var border_color = "border-color: " + getUnderlineColor(important_values[i].most_important); + ";"
 			$('.pie-stat-screen .chart-detail h1').html(
-				'<span class="percentage">'+ parseInt(important_values[i].percent) +'% of visitors</span> agree that <span class="underline blue">'+ important_values[i].most_important.toLowerCase() +'</span> should be the most important role of prisons.'
+				'<span class="percentage">'+ parseInt(important_values[i].percent) +'% of visitors</span> agree that <span class="underline"' + border_color + '>'+ important_values[i].most_important.toLowerCase() +'</span> is the most important role of prisons.'
 			);
 			break;	
 		}
@@ -367,13 +525,13 @@ function setupViewWithDBInfo() {
 
 function getMaxIndex() {
 	var important_values = jsonData.important_value;
-	var maximum = important_values[0].percent;
+	var maximum = parseInt(important_values[0].percent);
 	var index = 0;
 	
 	for(i = 1; i < important_values.length; i++) {
 		
 		if (important_values[i].perent > maximum) {
-			maximum = important_values[i].percent
+			maximum = parseInt(important_values[i].percent);
 			index = i;
 		}
 		
@@ -382,12 +540,19 @@ function getMaxIndex() {
 	return index;
 }
 
+var ExitTimer;
+function showDoneModal() {
+	$("#modal-content, #modal-background").addClass("active");
+	ExitTimer = setTimeout(function(){ window.location.href = window.location.pathname; }, 20000);
+}
+
 function introSetup() {
 	$('.btn-intro').click(function(){
+		
 		$('.home-screen .next').show();
 		clearInterval(intervalID);
-		$('.home-screen h1').text('What should prisons do?');
-		$('p.main-screen-intro').html("Drag to rank the priorities, in your view. What <span class='underline'>should</span> our prisons do?");
+		$('.home-screen h1').html('What <span class="underline">should</span> our prisons do?');
+		$('p.main-screen-intro').html("In your opinion, what is the most important job of our prison system?<br>Drag the icons to vote.");
 		$('.btn-intro').hide();
 		$('.more-info').hide();
 		$('.animation').removeClass('card-wrapper');
@@ -408,6 +573,9 @@ function introSetup() {
 		
 		    droppable.attr('data-current', draggable.attr('id') );
 		
+            var squareWidth = droppable.width();
+            var squareHeight = droppable.height();
+            ui.draggable.css({width: squareWidth, height: squareHeight});
 		
 		    //slides .square into place, centers content
 		    var $this = $(this);
@@ -441,10 +609,12 @@ function introSetup() {
 				 	//alert(result);
 				 	
 				 	square_order = result.split(",");
-				 	
+				 	var border_color = getUnderlineColor();
 				 	if(square_order[0] == "Incapacitation") {
 					 	$('.did-you-know .selected-square img').attr('src', incapacitation_image);
 					 	$('.did-you-know .details p').html(incapacitation_text);
+					 	
+					 	$('.question-section .question h1').html('Do you think the U.S. prison system <span class="underline" style="border-color: '+ border_color +'">incapacitates</span> dangerous people in effective and fair numbers?');
 					 	
 					 	setViewBasedOnSqaure("Incapacitation");
 				 	}
@@ -453,12 +623,16 @@ function introSetup() {
 					 	$('.did-you-know .selected-square img').attr('src', deterrence_image);
 					 	$('.did-you-know .details p').html(deterrence_text);	
 					 	
+					 	$('.question-section .question h1').html('Do you think the U.S. prison system succeeds in <span class="underline" style="border-color: '+ border_color +'">deterring</span> crime in a fair and effective way?');
+					 	
 					 	setViewBasedOnSqaure("Deterrence");
 				 	}
 				 	
 				 	if(square_order[0] == "Rehabilitation") {
 					 	$('.did-you-know .selected-square img').attr('src', rehabilitation_image);
 					 	$('.did-you-know .details p').html(rehabilitation_text);
+					 	
+					 	$('.question-section .question h1').html('Do you think the U.S. prison system succeeds in <span class="underline" style="border-color: '+ border_color +'">rehabilitating</span> men and women before their release?');
 					 	
 					 	setViewBasedOnSqaure("Rehabilitation");
 				 	}
@@ -467,9 +641,12 @@ function introSetup() {
 					 	$('.did-you-know .selected-square img').attr('src', retribution_image);
 					 	$('.did-you-know .details p').html(retribution_text);
 					 	
+					 	$('.question-section .question h1').html('Do you think that U.S. prisons succeed in delivering the right amount of <span class="underline" style="border-color: '+ border_color +'">retribution</span> against lawbreakers?');
+					 	
 					 	setViewBasedOnSqaure("Retribution");
 				 	}
 				 	
+				 	$('.did-you-know .details h1').text(square_order[0] + ' at ESP');
 				 	$('span.value-enough').text(square_order[0].toLowerCase());
 				 	
 				 	
@@ -477,40 +654,40 @@ function introSetup() {
 					 	var arr = interactiveJsonData.important_value[0];
 					 	
 					 	$('.chart-detail .detail h1').html( 
-					 		arr.percent + 
+					 		parseInt(arr.percent) + 
 					 		'% of visitors agree that <span class="underline" style="border-color:#D31E2A;">'+ 
 					 		arr.value.toLowerCase() +
-					 		'</span> should be the most important role of prisons.');
+					 		'</span> is the most important role of prisons.');
 				 	}
 				 	
 				 	if(interactiveJsonData.important_value[1].value == square_order[0]) {
 					 	var arr = interactiveJsonData.important_value[1];
 					 	
 					 	$('.chart-detail .detail h1').html( 
-					 		arr.percent + 
+					 		parseInt(arr.percent) + 
 					 		'% of visitors agree that <span class="underline" style="border-color:#E4777C;">'+ 
 					 		arr.value.toLowerCase() +
-					 		'</span> should be the most important role of prisons.');
+					 		'</span> is the most important role of prisons.');
 				 	}
 				 	
 				 	if(interactiveJsonData.important_value[2].value == square_order[0]) {
 					 	var arr = interactiveJsonData.important_value[2];
 					 	
 					 	$('.chart-detail .detail h1').html( 
-					 		arr.percent + 
+					 		parseInt(arr.percent) + 
 					 		'% of visitors agree that <span class="underline" style="border-color:#811727;">'+ 
 					 		arr.value.toLowerCase() +
-					 		'</span> should be the most important role of prisons.');
+					 		'</span> is the most important role of prisons.');
 				 	}
 				 	
 				 	if(interactiveJsonData.important_value[3].value == square_order[0]) {
 					 	var arr = interactiveJsonData.important_value[3];
 					 	
 					 	$('.chart-detail .detail h1').html( 
-					 		arr.percent + 
+					 		parseInt(arr.percent) + 
 					 		'% of visitors agree that <span class="underline" style="border-color:#9D7E8B;">'+ 
 					 		arr.value.toLowerCase() +
-					 		'</span> should be the most important role of prisons.');
+					 		'</span> is the most important role of prisons.');
 				 	}
 				 	
 				 	
@@ -689,31 +866,65 @@ function nextButtonSetup() {
 	        }
 	        
 	        if(class_name == '.why-else-screen') {
-		        //capture_data(false);
+		        capture_data(false);
 	        }
 	      }
     	}
     });
 }
 
+function checkScreenSize() {
+	var rightSize =  document.body.clientWidth >= 980 && document.body.clientHeight >= 768;
+	
+	if(!rightSize) {
+		$('.error-screen').show();
+	}
+}
 
+var timeout = [];
+function resetTimeout () {
+    if (timeout) {
+        $.each(timeout, function(index, value){
+            clearTimeout(value);
+            timeout.splice(index, 1);
+        });
+    }
+    timeout.push(setTimeout(showDoneModal, 120000));
+}
 
 $(document).ready(function(){
+	
+	checkScreenSize();
+	
 	preSetup();
 	
 	introSetup();
+
+    // HIDE ME FOR WEB
+    $(document).on('click tap drag', resetTimeout);
+    
+	
+	$('#modal-background, #modal-content').click(function(){
+		$("#modal-content, #modal-background").removeClass("active");
+		clearTimeout(ExitTimer);
+		idleTime = 0;
+	});
 	
     $('.card').click(function(){
       clearInterval(intervalID);
-      $('.card').removeClass('flip');
-      $(this).addClass("flip");
+      if($(this).hasClass('flip')) {
+	  	$('.card').removeClass('flip');   
+      } else {
+	      $('.card').removeClass('flip');
+	      $(this).addClass("flip");
+      }
     });
 
-    $('.card .close-icon').click(function(event){
+    /*$('.card .close-icon').click(function(event){
       event.stopPropagation(); //Fire event to stap .card click event from firing
       clearInterval(intervalID);
       $(this).parents(".card").removeClass("flip");
-    });
+    });*/
 
     $('.options button').click(function(){
     	$('.options button').removeClass('active');
@@ -792,45 +1003,10 @@ $(document).ready(function(){
     });
     
     $('.btn-back-home').click(function(){
-	   capture_data(true);
-    });
-    
-    function capture_data(redirect) {
-	    var value_reflected = $('.options button.active').text().toLowerCase().trim();
-		
-		if(square_order.length > 0) {
-			var objRequest = {
-				'most_important': square_order[0],
-				'second_most_important': square_order[1],
-				'third_most_important': square_order[2],
-				'least_important': square_order[3],
-				'value_reflected': value_reflected ? value_reflected : '',
-				'profit_motives_selected': $('.reason-options li.economic').hasClass('selected') ? 1 : 0,
-				'racial_control_selected': $('.reason-options li.racial').hasClass('selected') ? 1 : 0,
-				'addiction_poverty_selected': $('.reason-options li.poverty').hasClass('selected') ? 1 : 0,
-				'no_objective_selected': $('.reason-options li.nootherreason').hasClass('selected') ? 1 : 0,
-				'something_else': $('.reason-options li.somethingelse').hasClass('selected') ? $('input.txt').val() : '', 
-				'web_or_exhibit': 'web'
-			};
-		
-			var request = $.ajax({
-				url: "./data/post_data.php",
-				type: "POST",
-				data: objRequest,
-				dataType: "html"
-			});
-		
-			if(redirect) {
-				request.done(function(msg) {
-					window.location.href = window.location.pathname;
-				});
-		
-				request.fail(function(jqXHR, textStatus) {
-					window.location.href = window.location.pathname;
-				});	
-			}
+	    if(square_order.length > 0) {
+			capture_data(true);
 		} else {
-			window.location.href = window.location.pathname;	
+			window.location.href = window.location.pathname;
 		}
-    }
+    });
 });

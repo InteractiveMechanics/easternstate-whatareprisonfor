@@ -15,8 +15,7 @@ body {
 }
 
 .screen {
-  background: #333b4a;
-  background: url(../assets/prisons-bg@2x.jpg);
+  background: url(../assets/prisons-bg@2x.jpg) #333b4a;
   background-repeat: no-repeat;
   background-size: cover;
   width:1024px;
@@ -24,7 +23,7 @@ body {
   position: absolute;
   top:0;
   right: 0;
-}
+ }
 
 .square{
   position: absolute;
@@ -240,17 +239,17 @@ body {
 }
 
 #Incapacitation{
-  left:50px;
+  right:175px;
 }
 #Deterrence{
   left:180px;
 }
 
 #Rehabilitation{
-  right:175px;
+  right:50px;
 }
 #Retribution{
-  right:50px;
+  left:50px;
 }
 
 .placed{
@@ -335,7 +334,8 @@ span.underline {
   float: left;
 }
 .pie-stat-screen .question {
-  margin-top:35px;
+  width: 85%;
+  margin: 40px auto 0;
 }
 
 .pie-stat-screen .chart-detail .detail {
@@ -450,6 +450,8 @@ span.underline {
   text-align: center;
   margin-top: 0px;
   text-shadow: 0 4px 0px #272c35;
+  margin-bottom: 0;
+  font-size: 54px;
 }
 
 /** Why else screen **/
@@ -463,7 +465,7 @@ span.underline {
 }
 
 .why-else-screen .reason-options {
-  margin-top:35px;
+  margin-top: 60px;
 }
 
 .why-else-screen .reason-options ul {
@@ -545,15 +547,15 @@ span.underline {
   list-style: none;
     color:white;
     font-weight: 100;
-    font-size: 24px;
-    margin:5px 0;
+    font-size: 18px;
+    margin:8px 0;
 }
 
 .final-screen .final-chart-legend li span{
     display: inline-block;
     width: 12px;
     height: 12px;
-    margin-right: 5px;
+    margin-right: 12px;
 }
 
 /** Helper Items **/
@@ -648,8 +650,8 @@ span.underline.blue {
     z-index: 98;
     width: 325px;
     padding: 35px;
-    top: 210px;
-    left: 405px;
+    top: 200px;
+    left: 195px;
     display: none;
     box-shadow: 0px 6px 25px rgba(0,0,0,.5);
 }
@@ -848,15 +850,15 @@ input:focus, button:focus {outline:0;}
 }
 
 .pre-final-screen .graphic ul li span {
-	font-size: 30px;
+	font-size: 90px;
     font-weight: bold;
     display: inline-block;
-    width: 85px;
     text-shadow: 0 4px 0px #272c35;
 }
 
 .pre-final-screen .graphic ul {
 	margin:40px 0;
+	padding: 0 0 0 20px;
 }
 
 .pre-final-screen .graphic ul li span.red {
@@ -875,8 +877,9 @@ input:focus, button:focus {outline:0;}
 	font-size: 18px;
     font-weight: bold;
     color:white;
+    text-align: center;
     list-style: none;
-    width: 190px;
+    width: 210px;
     text-shadow: 0 4px 0px #272c35;
     margin-bottom: 10px;
 }
@@ -887,6 +890,7 @@ input:focus, button:focus {outline:0;}
     font-size: 21px;
     font-weight: 100;
 }
+
 
 .final-done-screen {
   background: url(../assets/prisons-ending-bg@2x.jpg);
@@ -927,3 +931,73 @@ input:focus, button:focus {outline:0;}
     border-width: 3px;
     font-size: 18px;
 }
+
+
+.error-screen {
+  background: #333b4a;
+  background: url(../assets/prisons-bg@2x.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width:1024px;
+  height: 768px;
+  position: absolute;
+  top:0;
+  right: 0;
+}
+
+.error-screen .other-reason {
+  position: absolute;
+    top: 30%;
+    margin: 0 auto;
+    right: 0;
+    left: 0;
+    width: 75%;
+}
+
+.error-screen .other-reason h1 {
+  font-weight: 200;
+  text-align: center;
+  color:white;
+  font-weight: 200px;
+  line-height:50px;
+  font-size: 30px;
+}
+
+#modal-background {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1024px;
+    height: 768px;
+    background-color: black;
+    opacity: .50;
+    -webkit-opacity: .5;
+    -moz-opacity: .5;
+    filter: alpha(opacity=50);
+    z-index: 1000;
+}
+
+#modal-content {
+	padding: 50px;
+    position: absolute;
+    width: 320px;
+    z-index: 1000;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: 0 auto;
+    height: 120px;
+    z-index: 1000;
+    display: none;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    color:#454545;
+    text-align: center;
+}
+
+#modal-background.active, #modal-content.active {
+    display: block;
+}​
