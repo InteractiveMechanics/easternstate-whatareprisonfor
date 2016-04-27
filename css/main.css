@@ -298,7 +298,7 @@ body {
 }
 
 .did-you-know-screen .details {
-  width: 65%;
+  width: 66%;
 }
 
 .did-you-know-screen .details h1, p{
@@ -961,6 +961,13 @@ input:focus, button:focus {outline:0;}
   font-weight: 200px;
   line-height:50px;
   font-size: 30px;
+}
+
+p.visitor_count {
+	text-align: center;
+	font-size: 20px;
+	line-height: 40px;
+	font-weight: 100;
 }
 
 #modal-background {

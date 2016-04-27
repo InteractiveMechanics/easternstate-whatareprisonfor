@@ -36,7 +36,7 @@ request.done(function(data) {
 	
 	var value = json_data.important_value[0].value;
 	var percent = parseInt(json_data.important_value[0].percent);
-	$('.most-important-note p').html(percent + '% of visitors think that <span class="underline">'+value+'</span> is the highest priority of our prison system.');
+	$('.most-important-note p').html(percent + '% of visitors think that <span class="underline">'+value+'</span> should be the highest priority of our prison system.');
 	
 	var maxIndex = 0;
 	if(value == "Incapacitation") {
@@ -195,7 +195,13 @@ request.done(function(data) {
     var counties = document.getElementById("final-pie-chart").getContext("2d");
     var myCountiesChart = new Chart(counties).Pie(secondPieData, pieOptions);
     document.getElementById('FinalChartLegend').innerHTML = myCountiesChart.generateLegend();
+    
+    $('p.visitor_count').html('Thank you for sharing your thoughts. <strong>'+ addCommas(interactiveJsonData.count) +' people have voted to date.</strong>');
 });
+
+	function addCommas(x) {
+    	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
 
 	function getUnderlineColor() {
 		if(interactiveJsonData.important_value[0].value == square_order[0]) {
@@ -216,12 +222,51 @@ request.done(function(data) {
 	}
 
 
+function getScreenViewName(screen) {
+	
+	if(page == '.did-you-know-screen') {
+		return 'Did You Know Screen?'
+	}
+	
+	if(page == '.pie-stat-screen') {
+		return 'First Pie Chart Screen'
+	}
+	
+	if(page == '.other-reason-screen') {
+		return 'Other Reasons Screen'
+	}
+	
+	if(page == '.why-else-screen') {
+		return 'Why Else Screen?'
+	}
+	
+	if(page == '.final-screen') {
+		return 'Second Pie Chart Screen'
+	}
+	
+	if(page == '.pre-final-screen') {
+		return 'Summary Screen'
+	}
+	
+	if(page == '.final-done-screen') {
+		return 'Final Screen'
+	}
+	
+}
+
+function sendGAEvent(screen) {
+	ga('send', 'screenview', {
+	  'appName': 'What are prisons for?',
+	  'screenName': screen
+	});
+}
+
 function surenessValue(value, term) {
 	
 	if(term == "Deterrence") {
 		
 		if(value = 'no') {
-		return 'of those visitors think that our prisons do not effectively deter crime.';
+		return 'of those visitors think that our prisons <span class="underline">do not effectively</span> deter crime.';
 		}
 
 		if(value = 'unsure') {
@@ -229,7 +274,7 @@ function surenessValue(value, term) {
 		}
 
 		if(value = 'yes') {
-			return 'of those visitors think that our prisons effectively deter crime.';
+			return 'of those visitors think that our prisons <span class="underline">effectively</span> deter crime.';
 		}
 		
 	}
@@ -237,11 +282,11 @@ function surenessValue(value, term) {
 	if(term == "Rehabilitation") {
 		
 		if(value = 'no') {
-		return 'of those visitors think that our prisons do not effectively rehabilitate people.';
+		return 'of those visitors think that our prisons <span class="underline">do not effectively</span> rehabilitate people.';
 		}
 
 		if(value = 'yes') {
-			return 'of those visitors think that our prisons effectively rehabilitate people.';
+			return 'of those visitors think that our prisons <span class="underline">effectively</span> rehabilitate people.';
 		}
 
 		if(value = 'unsure') {
@@ -253,7 +298,7 @@ function surenessValue(value, term) {
 	if(term == "Retribution") {
 		
 		if(value = 'no') {
-		return 'of those visitors think that our prisons do not provide appropriate retribution to lawbreakers.';
+		return 'of those visitors think that our prisons <span class="underline">do not provide</span> appropriate retribution to lawbreakers.';
 		}
 
 		if(value = 'unsure') {
@@ -261,7 +306,7 @@ function surenessValue(value, term) {
 		}
 
 		if(value = 'yes') {
-			return 'of those visitors think that our prisons provide appropriate retribution to lawbreakers.';
+			return 'of those visitors think that our prisons <span class="underline">provide</span> appropriate retribution to lawbreakers.';
 		}
 		
 	}
@@ -269,7 +314,7 @@ function surenessValue(value, term) {
 	if(term == "Incapacitation") {
 		
 		if(value = 'yes') {
-		return 'of those visitors think that our prisons incapacitate dangerous people in effective and fair numbers.';
+		return 'of those visitors think that our prisons <span class="underline">incapacitate</span> dangerous people in effective and fair numbers.';
 		}
 
 		if(value = 'unsure') {
@@ -277,7 +322,7 @@ function surenessValue(value, term) {
 		}
 
 		if(value = 'no') {
-			return 'of those visitors think that our prisons do not incapacitate dangerous people in effective and fair numbers.';
+			return 'of those visitors think that our prisons <span class="underline">do not incapacitate</span> dangerous people in effective and fair numbers.';
 		}
 		
 	}
@@ -439,7 +484,7 @@ function setViewBasedOnSqaure(value) {
 		if(important_values[i].most_important == value) {
 			var border_color = "border-color: " + getUnderlineColor(important_values[i].most_important); + ";"
 			$('.pie-stat-screen .chart-detail h1').html(
-				'<span class="percentage">'+ parseInt(important_values[i].percent) +'% of visitors</span> agree that <span class="underline"' + border_color + '>'+ important_values[i].most_important.toLowerCase() +'</span> is the most important role of prisons.'
+				'<span class="percentage">'+ parseInt(important_values[i].percent) +'% of visitors</span> agree that <span class="underline"' + border_color + '>'+ important_values[i].most_important.toLowerCase() +'</span> should be the most important role of prisons.'
 			);
 			break;	
 		}
@@ -548,7 +593,7 @@ function showDoneModal() {
 
 function introSetup() {
 	$('.btn-intro').click(function(){
-		
+		//sendGAEvent('Icon Ordering Screen');
 		$('.home-screen .next').show();
 		clearInterval(intervalID);
 		$('.home-screen h1').html('What <span class="underline">should</span> our prisons do?');
@@ -657,7 +702,7 @@ function introSetup() {
 					 		parseInt(arr.percent) + 
 					 		'% of visitors agree that <span class="underline" style="border-color:#D31E2A;">'+ 
 					 		arr.value.toLowerCase() +
-					 		'</span> is the most important role of prisons.');
+					 		'</span> should be the most important role of prisons.');
 				 	}
 				 	
 				 	if(interactiveJsonData.important_value[1].value == square_order[0]) {
@@ -667,7 +712,7 @@ function introSetup() {
 					 		parseInt(arr.percent) + 
 					 		'% of visitors agree that <span class="underline" style="border-color:#E4777C;">'+ 
 					 		arr.value.toLowerCase() +
-					 		'</span> is the most important role of prisons.');
+					 		'</span> should be the most important role of prisons.');
 				 	}
 				 	
 				 	if(interactiveJsonData.important_value[2].value == square_order[0]) {
@@ -677,7 +722,7 @@ function introSetup() {
 					 		parseInt(arr.percent) + 
 					 		'% of visitors agree that <span class="underline" style="border-color:#811727;">'+ 
 					 		arr.value.toLowerCase() +
-					 		'</span> is the most important role of prisons.');
+					 		'</span> should be the most important role of prisons.');
 				 	}
 				 	
 				 	if(interactiveJsonData.important_value[3].value == square_order[0]) {
@@ -687,7 +732,7 @@ function introSetup() {
 					 		parseInt(arr.percent) + 
 					 		'% of visitors agree that <span class="underline" style="border-color:#9D7E8B;">'+ 
 					 		arr.value.toLowerCase() +
-					 		'</span> is the most important role of prisons.');
+					 		'</span> should be the most important role of prisons.');
 				 	}
 				 	
 				 	
@@ -824,6 +869,11 @@ function nextButtonSetup() {
 	  if(!$(this).hasClass('disabled')) {
 	      var class_name = $(this).data('divclass');
 	      if(class_name) {
+		      
+		      
+		   // var screen = getScreenViewName(class_name);  
+		   // sendGAEvent(screen);
+		    
 	        $(class_name).addClass('animated fadeOutLeft');
 	
 	        if(class_name == '.home-screen') {
@@ -893,7 +943,7 @@ function resetTimeout () {
 }
 
 $(document).ready(function(){
-	
+	//sendGAEvent('Home Screen');
 	checkScreenSize();
 	
 	preSetup();
@@ -972,9 +1022,14 @@ $(document).ready(function(){
 			$('.reason-options ul li').removeClass('selected');
 		}
 		
+		
 		if(type != "nootherreason") {
 			if($('.reason-options ul li.nootherreason').hasClass('selected')) {
 				$('.reason-options ul li').removeClass('selected');	
+				
+				if(type == 'somethingelse') {
+					$(this).toggleClass('selected');
+				}
 			}
 		}
 		

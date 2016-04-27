@@ -210,13 +210,24 @@
 		
 	};
 	
+	/** Retribution Reflected **/
+	$q = "SELECT Count(*) as total FROM `esp_prisons`";
+	$query = mysqli_query($con, $q);
+	
+	$total_count = 0;
+	
+	while($row = mysqli_fetch_assoc($query)){
+		$total_count = $row['total'];
+	}
+	
 	$data = array(
 		"important_value" => $imporant_array,
 		"deterrence" => $deterrence,
 		"rehabilitation" => $rehabilitation,
 		"incapacitation" => $incapacitation,
 		"retribution" => $retribution,
-		"other_reasons" => $other_reasons
+		"other_reasons" => $other_reasons,
+		"count" => $total_count
 	);
 	
 	print_r(json_encode($data));
